@@ -1,0 +1,46 @@
+ความรู้พื้นฐานเรื่อง Cloud Computing
+
+== Cloud Computing คืออะไร ==
+Cloud Computing คือการใช้งานทรัพยากรคอมพิวเตอร์ เช่น เซิร์ฟเวอร์ พื้นที่จัดเก็บข้อมูล ฐานข้อมูล และเครือข่าย ผ่านอินเทอร์เน็ต โดยจ่ายตามการใช้งานจริง (Pay-as-you-go) ไม่ต้องซื้อและดูแลฮาร์ดแวร์เอง
+
+== รูปแบบบริการ (Service Models) ==
+- IaaS (Infrastructure as a Service): ให้บริการโครงสร้างพื้นฐาน เช่น เครื่องเสมือนและเครือข่าย ผู้ใช้ต้องดูแลระบบปฏิบัติการเอง ตัวอย่าง: Amazon EC2, Google Compute Engine
+- PaaS (Platform as a Service): ให้บริการแพลตฟอร์มสำหรับรันแอป ผู้ใช้ส่งแค่โค้ด ไม่ต้องดูแลเซิร์ฟเวอร์ ตัวอย่าง: Render, Heroku, Google App Engine, AWS Elastic Beanstalk
+- SaaS (Software as a Service): ให้บริการซอฟต์แวร์สำเร็จรูปผ่านเว็บ ตัวอย่าง: Gmail, Google Docs, Microsoft 365
+
+== รูปแบบการติดตั้ง (Deployment Models) ==
+- Public Cloud: คลาวด์ที่ผู้ให้บริการเปิดให้คนทั่วไปใช้ เช่น AWS, Azure, GCP
+- Private Cloud: คลาวด์ที่องค์กรใช้เพียงองค์กรเดียว
+- Hybrid Cloud: ผสมระหว่าง Public และ Private Cloud
+
+== Amazon EC2 ==
+EC2 (Elastic Compute Cloud) คือบริการเครื่องเสมือนของ AWS ผู้ใช้เลือกประเภท instance เช่น t2.micro, t3.micro ได้ตามความต้องการ และต้องตั้งค่า Security Group เพื่อกำหนดพอร์ตที่อนุญาต เช่น พอร์ต 22 สำหรับ SSH และพอร์ต 80 สำหรับ HTTP
+
+== Launch Template ==
+Launch Template คือแม่แบบที่เก็บการตั้งค่าของ EC2 instance เช่น AMI, instance type, key pair, security group และ user data เพื่อใช้สร้าง instance ซ้ำ ๆ ได้แบบเดียวกัน
+
+== Auto Scaling Group (ASG) ==
+Auto Scaling Group ทำหน้าที่เพิ่มหรือลดจำนวน EC2 instance อัตโนมัติตามภาระงาน โดยกำหนดค่า Minimum, Desired และ Maximum capacity ถ้า instance ใดเสีย ASG จะสร้างตัวใหม่แทนให้อัตโนมัติ
+
+== Amazon CloudWatch ==
+CloudWatch คือบริการตรวจสอบและเก็บ metric ของทรัพยากร AWS เช่น CPUUtilization สามารถสร้าง Alarm เพื่อแจ้งเตือนหรือสั่งให้ ASG scale out/scale in ได้
+- Basic monitoring: เก็บข้อมูลทุก 5 นาที (ฟรี)
+- Detailed monitoring: เก็บข้อมูลทุก 1 นาที (มีค่าใช้จ่าย)
+สถานะของ Alarm มี 3 แบบ คือ OK, In alarm และ Insufficient data
+
+== Elastic Load Balancer (ELB) ==
+Load Balancer กระจาย traffic ไปยังหลาย instance เพื่อให้ระบบรองรับผู้ใช้ได้มากขึ้นและทนต่อความล้มเหลว ประเภทที่ใช้บ่อยคือ Application Load Balancer (ALB) สำหรับ HTTP/HTTPS
+
+== Amazon S3 ==
+S3 (Simple Storage Service) คือบริการจัดเก็บไฟล์แบบ Object Storage ข้อมูลเก็บใน Bucket มีความทนทานสูง ใช้เก็บรูปภาพ ไฟล์สำรอง หรือโฮสต์เว็บไซต์แบบ static ได้
+
+== RAG (Retrieval-Augmented Generation) ==
+RAG คือเทคนิคที่ให้โมเดลภาษา (LLM) ค้นข้อมูลจากแหล่งความรู้ภายนอกก่อนตอบ ขั้นตอนคือ
+1. แบ่งเอกสารเป็นส่วนย่อย (chunk)
+2. แปลงแต่ละ chunk เป็น embedding (เวกเตอร์ตัวเลข)
+3. เมื่อผู้ใช้ถาม ระบบแปลงคำถามเป็น embedding แล้วค้นหา chunk ที่ใกล้เคียงที่สุด
+4. ส่ง chunk ที่เกี่ยวข้องพร้อมคำถามให้ LLM สร้างคำตอบ
+ข้อดีคือช่วยลดการตอบมั่ว (hallucination) และทำให้ตอบจากข้อมูลเฉพาะทางได้โดยไม่ต้องเทรนโมเดลใหม่
+
+== AI Agent ==
+AI Agent คือระบบ AI ที่สามารถวางแผน ตัดสินใจ และใช้เครื่องมือ (tools) เช่น การค้นหาข้อมูล เพื่อทำงานให้สำเร็จตามเป้าหมาย ไม่ใช่แค่ตอบคำถามครั้งเดียว
