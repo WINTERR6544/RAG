@@ -1,6 +1,6 @@
 # 🤖 Gemini RAG Assistant (Python + Streamlit)
 
-เว็บแอปพลิเคชัน RAG (Retrieval-Augmented Generation) พัฒนาด้วย **Python** และ **Streamlit** ขับเคลื่อนด้วย **Google Gemini API** (`gemini-2.5-flash` และ `gemini-embedding-001`) โดยอ่านเอกสารจากโฟลเดอร์ `docs/` ทำ Text Chunking, สร้าง Embeddings และเก็บข้อมูลเวกเตอร์ไว้ใน **In-Memory** พร้อมค้นหา Chunk ที่เกี่ยวข้องที่สุด (Cosine Similarity) แล้วส่งต่อให้ LLM ตอบคำถามได้อย่างแม่นยำ พร้อมแสดงเอกสารอ้างอิงและคะแนนความเกี่ยวข้อง (Similarity Score)
+เว็บแอปพลิเคชัน RAG (Retrieval-Augmented Generation) พัฒนาด้วย **Python** และ **Streamlit** ขับเคลื่อนด้วย **Google Gemini API** (`gemini-3.8-flash` และ `gemini-embedding-001`) โดยอ่านเอกสารจากโฟลเดอร์ `docs/` ทำ Text Chunking, สร้าง Embeddings และเก็บข้อมูลเวกเตอร์ไว้ใน **In-Memory** พร้อมค้นหา Chunk ที่เกี่ยวข้องที่สุด (Cosine Similarity) แล้วส่งต่อให้ LLM ตอบคำถามได้อย่างแม่นยำ พร้อมแสดงเอกสารอ้างอิงและคะแนนความเกี่ยวข้อง (Similarity Score)
 
 ---
 
@@ -117,7 +117,7 @@ streamlit run app.py
 
 ## ⚙️ พารามิเตอร์ที่สามารถปรับแต่งได้ในหน้าเว็บ
 
-- **LLM Model**: เลือกระหว่าง `gemini-2.5-flash`, `gemini-2.5-flash-lite`, หรือ `gemini-2.5-pro`
+- **LLM Model**: ค่าเริ่มต้น `gemini-3.8-flash` หรือเลือกโมเดลอื่นที่ API Key ของคุณใช้งานได้ (ดึงรายการอัตโนมัติ)
 - **Top-K Chunks**: จำนวนส่วนของเอกสารที่ใกล้เคียงที่สุดที่จะส่งให้ LLM (ค่าเริ่มต้นคือ 3)
 - **Chunk Size / Overlap**: ขนาดความยาวตัวอักษรของแต่ละ chunk และระยะซ้อนทับ
 - **Re-index Button**: กดเพื่อสร้าง Index ใหม่เมื่อมีการแก้ไขหรือเพิ่มเอกสารใน `docs/`

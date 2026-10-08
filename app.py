@@ -1,7 +1,7 @@
 import os
 import streamlit as st
 from dotenv import load_dotenv
-from rag_engine import GeminiRAG, DEFAULT_GENERATION_MODEL, DEFAULT_EMBEDDING_MODEL
+from rag_engine import GeminiRAG, DEFAULT_GENERATION_MODEL, DEFAULT_EMBEDDING_MODEL, list_generation_models
 
 # Load .env file if available
 load_dotenv()
@@ -82,11 +82,21 @@ with st.sidebar:
     st.markdown("---")
     st.subheader("🧠 โมเดล & พารามิเตอร์")
 
+    @st.cache_data(ttl=3600, show_spinner=False)
+    def get_model_options(key: str) -> list:
+        try:
+            models = list_generation_models(key)
+        except Exception:
+            models = []
+        if DEFAULT_GENERATION_MODEL in models:
+            models.remove(DEFAULT_GENERATION_MODEL)
+        return [DEFAULT_GENERATION_MODEL] + models
+
     selected_model = st.selectbox(
         "LLM Model:",
-        options=["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.5-pro"],
+        options=get_model_options(api_key),
         index=0,
-        help="gemini-2.5-flash ตอบเร็ว เหมาะสำหรับ RAG ทั่วไป"
+        help=f"{DEFAULT_GENERATION_MODEL} ตอบเร็ว เหมาะสำหรับ RAG ทั่วไป (รายการโมเดลดึงจาก API Key ของคุณ)"
     )
 
     top_k = st.slider(

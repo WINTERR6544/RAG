@@ -19,8 +19,21 @@ except ImportError:
     HAS_GENAI = False
 
 # Model constants
-DEFAULT_GENERATION_MODEL = "gemini-2.5-flash"
+DEFAULT_GENERATION_MODEL = "gemini-3.8-flash"
 DEFAULT_EMBEDDING_MODEL = "models/gemini-embedding-001"
+
+
+def list_generation_models(api_key: str) -> List[str]:
+    """Return Gemini models available to this API key that support generateContent."""
+    if not HAS_GENAI or not api_key:
+        return []
+    genai.configure(api_key=api_key)
+    names = [
+        m.name.removeprefix("models/")
+        for m in genai.list_models()
+        if "generateContent" in m.supported_generation_methods and "gemini" in m.name
+    ]
+    return sorted(names, reverse=True)
 
 
 class DocumentChunk:
