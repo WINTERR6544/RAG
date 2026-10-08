@@ -84,9 +84,9 @@ with st.sidebar:
 
     selected_model = st.selectbox(
         "LLM Model:",
-        options=["gemini-1.5-flash", "gemini-2.0-flash", "gemini-1.5-pro"],
+        options=["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.5-pro"],
         index=0,
-        help="gemini-1.5-flash ตอบเร็ว เหมาะสำหรับ RAG ทั่วไป"
+        help="gemini-2.5-flash ตอบเร็ว เหมาะสำหรับ RAG ทั่วไป"
     )
 
     top_k = st.slider(

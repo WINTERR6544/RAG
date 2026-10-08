@@ -19,8 +19,8 @@ except ImportError:
     HAS_GENAI = False
 
 # Model constants
-DEFAULT_GENERATION_MODEL = "gemini-1.5-flash"
-DEFAULT_EMBEDDING_MODEL = "models/text-embedding-004"
+DEFAULT_GENERATION_MODEL = "gemini-2.5-flash"
+DEFAULT_EMBEDDING_MODEL = "models/gemini-embedding-001"
 
 
 class DocumentChunk:

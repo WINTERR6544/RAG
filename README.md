@@ -1,6 +1,6 @@
 # 🤖 Gemini RAG Assistant (Python + Streamlit)
 
-เว็บแอปพลิเคชัน RAG (Retrieval-Augmented Generation) พัฒนาด้วย **Python** และ **Streamlit** ขับเคลื่อนด้วย **Google Gemini API** (`gemini-1.5-flash` และ `text-embedding-004`) โดยอ่านเอกสารจากโฟลเดอร์ `docs/` ทำ Text Chunking, สร้าง Embeddings และเก็บข้อมูลเวกเตอร์ไว้ใน **In-Memory** พร้อมค้นหา Chunk ที่เกี่ยวข้องที่สุด (Cosine Similarity) แล้วส่งต่อให้ LLM ตอบคำถามได้อย่างแม่นยำ พร้อมแสดงเอกสารอ้างอิงและคะแนนความเกี่ยวข้อง (Similarity Score)
+เว็บแอปพลิเคชัน RAG (Retrieval-Augmented Generation) พัฒนาด้วย **Python** และ **Streamlit** ขับเคลื่อนด้วย **Google Gemini API** (`gemini-2.5-flash` และ `gemini-embedding-001`) โดยอ่านเอกสารจากโฟลเดอร์ `docs/` ทำ Text Chunking, สร้าง Embeddings และเก็บข้อมูลเวกเตอร์ไว้ใน **In-Memory** พร้อมค้นหา Chunk ที่เกี่ยวข้องที่สุด (Cosine Similarity) แล้วส่งต่อให้ LLM ตอบคำถามได้อย่างแม่นยำ พร้อมแสดงเอกสารอ้างอิงและคะแนนความเกี่ยวข้อง (Similarity Score)
 
 ---
 
@@ -27,7 +27,7 @@ RAG/
 ## 🚀 จุดเด่นของระบบ (Features)
 
 1. **In-Memory Vector Store**: ไม่ต้องติดตั้งฐานข้อมูลภายนอก คำนวณ Cosine Similarity รวดเร็วด้วย NumPy และมี Pure-Python Fallback
-2. **Gemini Embeddings (`text-embedding-004`)**: ใช้ Task Type แยกกันตามมาตรฐานของ Google (`retrieval_document` สำหรับเอกสาร และ `retrieval_query` สำหรับคำถาม) เพิ่มความแม่นยำในการค้นหา
+2. **Gemini Embeddings (`gemini-embedding-001`)**: ใช้ Task Type แยกกันตามมาตรฐานของ Google (`retrieval_document` สำหรับเอกสาร และ `retrieval_query` สำหรับคำถาม) เพิ่มความแม่นยำในการค้นหา
 3. **Smart Chunking**: แบ่งเอกสารตามย่อหน้าและบรรทัด โดยมี Overlap เพื่อไม่ให้บริบทของข้อความขาดตอน
 4. **Zero-Hallucination Prompting**: กำหนด Prompt สั่งให้ LLM ตอบจากเอกสารที่กำหนดเท่านั้น หากไม่มีข้อมูลให้แจ้งอย่างสุภาพ
 5. **Streaming Response**: แสดงผลคำตอบแบบเรียลไทม์ (Streaming) คล้าย ChatGPT
@@ -117,7 +117,7 @@ streamlit run app.py
 
 ## ⚙️ พารามิเตอร์ที่สามารถปรับแต่งได้ในหน้าเว็บ
 
-- **LLM Model**: เลือกระหว่าง `gemini-1.5-flash`, `gemini-2.0-flash`, หรือ `gemini-1.5-pro`
+- **LLM Model**: เลือกระหว่าง `gemini-2.5-flash`, `gemini-2.5-flash-lite`, หรือ `gemini-2.5-pro`
 - **Top-K Chunks**: จำนวนส่วนของเอกสารที่ใกล้เคียงที่สุดที่จะส่งให้ LLM (ค่าเริ่มต้นคือ 3)
 - **Chunk Size / Overlap**: ขนาดความยาวตัวอักษรของแต่ละ chunk และระยะซ้อนทับ
 - **Re-index Button**: กดเพื่อสร้าง Index ใหม่เมื่อมีการแก้ไขหรือเพิ่มเอกสารใน `docs/`
